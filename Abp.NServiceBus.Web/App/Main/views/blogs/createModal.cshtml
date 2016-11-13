@@ -1,0 +1,21 @@
+﻿<div>
+    <form name="blogCreateForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>@L("CreateNewBlog")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>@L("Name")</label>
+                <input type="text" name="Name" class="form-control" ng-model="vm.blog.name" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="blogCreateForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

@@ -102,6 +102,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blogs\BlogAppService.cs" />
+    <Compile Include="Blogs\Dto\BlogDto.cs" />
+    <Compile Include="Blogs\Dto\GetBlogsInput.cs" />
+    <Compile Include="Blogs\IBlogAppService.cs" />
     <Compile Include="NServiceBusApplicationModule.cs" />
     <Compile Include="NServiceBusAppServiceBase.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
@@ -130,9 +134,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abp.NServiceBus.Contracts\Abp.NServiceBus.Contracts.csproj">
+      <Project>{d83bc17e-7091-4dfb-aa5e-d28f04d15f48}</Project>
+      <Name>Abp.NServiceBus.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abp.NServiceBus.Core\Abp.NServiceBus.Core.csproj">
       <Project>{17298ea0-af73-4f30-b6f1-2066100d7d74}</Project>
       <Name>Abp.NServiceBus.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Abp.NServiceBus\Abp.NServiceBus.csproj">
+      <Project>{e8543de9-c9e8-4be5-a4c7-6768d5148e2e}</Project>
+      <Name>Abp.NServiceBus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

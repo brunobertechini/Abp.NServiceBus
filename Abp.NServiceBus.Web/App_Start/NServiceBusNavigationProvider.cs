@@ -40,6 +40,14 @@ namespace Abp.NServiceBus.Web
                         )
                 ).AddItem(
                     new MenuItemDefinition(
+                        "Blogs",
+                        L("Blogs"),
+                        url: "#blogs",
+                        icon: "fa fa-comments",
+                        requiredPermissionName: PermissionNames.Pages_Blogs
+                        )
+                ).AddItem(
+                    new MenuItemDefinition(
                         "About",
                         new LocalizableString("About", NServiceBusConsts.LocalizationSourceName),
                         url: "#/about",

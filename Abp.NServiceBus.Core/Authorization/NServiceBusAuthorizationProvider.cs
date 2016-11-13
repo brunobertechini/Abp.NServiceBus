@@ -17,6 +17,8 @@ namespace Abp.NServiceBus.Authorization
 
             var users = pages.CreateChildPermission(PermissionNames.Pages_Users, L("Users"));
 
+            var blogs = pages.CreateChildPermission(PermissionNames.Pages_Blogs, L("Blogs"));
+
             //Host permissions
             var tenants = pages.CreateChildPermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
         }

@@ -28,6 +28,16 @@
                 $urlRouterProvider.otherwise('/users');
             }
 
+            if (abp.auth.hasPermission('Pages.Blogs')) {
+                $stateProvider
+                    .state('blogs', {
+                        url: '/blogs',
+                        templateUrl: '/App/Main/views/blogs/index.cshtml',
+                        menu: 'Blogs' //Matches to name of 'Users' menu in NServiceBusNavigationProvider
+                    });
+                $urlRouterProvider.otherwise('/blogs');
+            }
+
             if (abp.auth.hasPermission('Pages.Tenants')) {
                 $stateProvider
                     .state('tenants', {

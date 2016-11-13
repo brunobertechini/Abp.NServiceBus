@@ -3,12 +3,14 @@ using Abp.Zero.EntityFramework;
 using Abp.NServiceBus.Authorization.Roles;
 using Abp.NServiceBus.MultiTenancy;
 using Abp.NServiceBus.Users;
+using System.Data.Entity;
+using Abp.NServiceBus.Blogs;
 
 namespace Abp.NServiceBus.EntityFramework
 {
     public class NServiceBusDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
-        //TODO: Define an IDbSet for your Entities...
+        public virtual IDbSet<Blog> Blogs { get; set; }
 
         /* NOTE: 
          *   Setting "Default" to base class helps us when working migration commands on Package Manager Console.

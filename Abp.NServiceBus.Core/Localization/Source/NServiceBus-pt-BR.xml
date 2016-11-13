@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Página Inicial" />
     <text name="About" value="Sobre" />
-    <text name="WellcomeMessage" value="Bem Vindo ao NServiceBus!" />
+    <text name="WellcomeMessage" value="Integração Abp com NServiceBus!" />
     
     <text name="FormIsNotValidMessage" value="Formulário não é válido. Por favor, verifique e corrija os erros." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant não pode estar vazio" />
@@ -43,5 +43,14 @@
     <text name="TenantSelection_Detail" value="Por favor selecione um dos seguintes tenants." />
     <text name="Logout" value="Sair" />
 
+    <text name="Blogs" value="Blogs" />
+    <text name="Id" value="Id" />
+    <text name="CreateNewBlog" value="Criar Novo Blog" />
+    <text name="CreationTime" value="Criado Em" />
+    <text name="LastModificationTime" value="Alterado Em" />
+    <text name="Edit" value="Editar" />
+    <text name="Delete" value="Deletar" />
+    <text name="AreYouSureToDeleteBlog" value="Tem certeza que deseja remover o blog {0} ?" />
+    <text name="SuccessfullyDeleted" value="Deletado com sucesso." />
   </texts>
 </localizationDictionary>

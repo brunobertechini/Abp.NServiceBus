@@ -1,0 +1,31 @@
+﻿<div ng-controller="app.views.blogs.index as vm">
+    <h1>@L("Blogs")</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <button ng-click="vm.openBlogCreationModal()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> @L("CreateNewBlog")</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="20%">@L("Id")</th>
+                        <th width="20%">@L("Name")</th>
+                        <th width="20%">@L("CreationTime")</th>
+                        <th width="20%">@L("LastModificationTime")</th>
+                        <th width="20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="blog in vm.blogs">
+                        <td>{{blog.id}}</td>
+                        <td>{{blog.name}}</td>
+                        <td>{{blog.creationTime}}</td>
+                        <td>{{blog.lastModificationTime}}</td>
+                        <td>
+                            <button ng-click="vm.openBlogCreationModal(blog)">@L("Edit")</button>
+                            <button ng-click="vm.deleteBlog(blog)">@L("Delete")</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

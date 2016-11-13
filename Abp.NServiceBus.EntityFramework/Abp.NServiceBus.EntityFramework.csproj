@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201609281412460_Upgrade_To_Abp_1_0.Designer.cs">
       <DependentUpon>201609281412460_Upgrade_To_Abp_1_0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611131313459_Added_Blog_Entity.cs" />
+    <Compile Include="Migrations\201611131313459_Added_Blog_Entity.Designer.cs">
+      <DependentUpon>201611131313459_Added_Blog_Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NServiceBusDataModule.cs" />
@@ -261,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609281412460_Upgrade_To_Abp_1_0.resx">
       <DependentUpon>201609281412460_Upgrade_To_Abp_1_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611131313459_Added_Blog_Entity.resx">
+      <DependentUpon>201611131313459_Added_Blog_Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

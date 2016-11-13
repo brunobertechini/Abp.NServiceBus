@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
-    <text name="WellcomeMessage" value="Welcome to NServiceBus!" />
+    <text name="WellcomeMessage" value="Abp integration with NServiceBus!" />
     
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
@@ -53,5 +53,15 @@
     <text name="Yes" value="Yes" />
     <text name="No" value="No" />
     <text name="Optional" value="Optional" />
+
+    <text name="Blogs" value="Blogs" />
+    <text name="Id" value="Id" />
+    <text name="CreateNewBlog" value="Create New Blog" />
+    <text name="CreationTime" value="Created At" />
+    <text name="LastModificationTime" value="Updated At" />
+    <text name="Edit" value="Edit" />
+    <text name="Delete" value="Delete" />
+    <text name="AreYouSureToDeleteBlog" value="Are you sure to delete blog {0} ?" />
+    <text name="SuccessfullyDeleted" value="Successfully deleted." />
   </texts>
 </localizationDictionary>
