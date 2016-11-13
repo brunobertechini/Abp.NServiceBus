@@ -1,6 +1,7 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Runtime.Session;
+using NServiceBus.Logging;
 using NServiceBus.Pipeline;
 using System;
 using System.Collections.Generic;
@@ -12,23 +13,29 @@ namespace Abp.NServiceBus
 {
     public class AbpNServiceBusUnitOfWork : Behavior<IIncomingPhysicalMessageContext>
     {
+        private ILog Logger = LogManager.GetLogger<AbpNServiceBusUnitOfWork>();
+
         public override async Task Invoke(IIncomingPhysicalMessageContext context, Func<Task> next)
         {
-            // Get instance of AbpNServiceBusSession
-            IAbpSession session = IocManager.Instance.Resolve<IAbpSession>();
-            AbpNServiceBusSession nsbSession = session as AbpNServiceBusSession;
+            Logger.InfoFormat("Message: {0}", context.MessageId);
 
-            // Set AbpSession properties from Headers
-            nsbSession.SetHeaders(context.MessageHeaders.ToDictionary(x => x.Key, y => y.Value));
+            // Get AbpSession
+            IAbpSession session = IocManager.Instance.Resolve<IAbpSession>();
+            Logger.InfoFormat("Message/AbpSession: {0}/{1}", context.MessageId, session.GetHashCode());
+
+            AbpNServiceBusSession nsbSession = session as AbpNServiceBusSession;
+            nsbSession.SetHeaders(context.MessageHeaders);
 
             // Get instance of UnitOfWorkManager
             IUnitOfWorkManager uowManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
+            Logger.InfoFormat("Message/UowManager: {0}/{1}", context.MessageId, uowManager.GetHashCode());
             IUnitOfWorkCompleteHandle unitOfWork;
 
             try
             {
                 // Start UnitOfWork if
                 unitOfWork = uowManager.Begin();
+                Logger.InfoFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, uowManager.Current.GetHashCode());
 
                 // Call next step in pipeline
                 await next();

@@ -25,22 +25,11 @@ namespace Abp.NServiceBus
     {
         public const string EndpointName = "Abp.NServiceBus.Endpoint1";
 
-        public override void PreInitialize()
-        {
-            Configuration.ReplaceService(typeof(IAbpSession), () =>
-            {
-                IocManager.Register<IAbpSession, AbpNServiceBusSession>(DependencyLifeStyle.Singleton);
-            });
-        }
-
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-        }
 
-        public override void PostInitialize()
-        {
-            var endpointConfiguration = new EndpointConfiguration(EndpointName);
+            var endpointConfiguration = new EndpointConfiguration(Endpoint1Bootstrapper.EndpointName);
             endpointConfiguration.PurgeOnStartup(false);
             endpointConfiguration.SendFailedMessagesTo("error");
             endpointConfiguration.AuditProcessedMessagesTo("audit");
@@ -111,7 +100,7 @@ namespace Abp.NServiceBus
                 Component.For<IEndpointInstance>().Instance(endpointInstance)
             );
 
-            Console.WriteLine(string.Format("NServiceBus endpoint {0} started successfully", EndpointName));
+            Console.WriteLine(string.Format("NServiceBus endpoint {0} started successfully", Endpoint1Bootstrapper.EndpointName));
         }
 
         public override void Shutdown()

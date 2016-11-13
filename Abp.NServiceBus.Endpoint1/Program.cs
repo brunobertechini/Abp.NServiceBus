@@ -1,6 +1,7 @@
 ﻿using Abp.Castle.Logging.Log4Net;
 using Abp.Dependency;
 using Castle.Facilities.Logging;
+using Castle.MicroKernel.Registration;
 using NServiceBus;
 using NServiceBus.Persistence;
 using NServiceBus.Transport.SQLServer;
@@ -15,8 +16,6 @@ namespace Abp.NServiceBus
 {
     class Program
     {
-        
-
         static void Main()
         {
             Console.Title = Endpoint1Bootstrapper.EndpointName;
@@ -36,15 +35,6 @@ namespace Abp.NServiceBus
             bootstrapper.Dispose();
 
             Console.WriteLine("Abp Disposed Successfully.");
-        }
-
-        static async Task AsyncMain2()
-        {
-            
-
-            
-
-            
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Abp.NServiceBus
 
         public AbpNServiceBusSession(IMultiTenancyConfig multiTenancy)
         {
+            Logger.InfoFormat("Creating new instance: {0}", GetHashCode());
             _multiTenancy = multiTenancy;
         }
 
@@ -111,9 +112,9 @@ namespace Abp.NServiceBus
             }
         }
 
-        public void SetHeaders(Dictionary<string, string> headers)
+        public void SetHeaders(IReadOnlyDictionary<string, string> headers)
         {
-            _headers = headers;
+            _headers = headers.ToDictionary(x => x.Key, y => y.Value);
         }
     }
 

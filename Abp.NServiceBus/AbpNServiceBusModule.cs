@@ -1,4 +1,6 @@
 ﻿using Abp.Modules;
+using Abp.Runtime.Session;
+using Castle.MicroKernel.Registration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,17 @@ namespace Abp.NServiceBus
     {
         public override void PreInitialize()
         {
+            // Replace IAbpSession
+            Configuration.ReplaceService(typeof(IAbpSession), () =>
+            {
+                IocManager.IocContainer.Register(
+                    Component.For<IAbpSession>()
+                             .ImplementedBy<AbpNServiceBusSession>()
+                             .IsDefault()
+                             .LifeStyle.Is(Castle.Core.LifestyleType.Scoped)
+                );
+            });
+
             // Module Config
             IocManager.Register<AbpNServiceBusModuleConfig>();
 
