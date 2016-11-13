@@ -41,6 +41,7 @@ namespace Abp.NServiceBus.Blogs
             await _endpointInstance.Send<PublishBlogCreated>(cmd =>
             {
                 cmd.BlogId = blog.Id;
+                cmd.ForceException = input.ForceException;
             });
         }
 
@@ -71,6 +72,7 @@ namespace Abp.NServiceBus.Blogs
             await _endpointInstance.Send<PublishBlogChanged>(cmd =>
             {
                 cmd.BlogId = blog.Id;
+                cmd.ForceException = input.ForceException;
             });
         }
     }

@@ -12,5 +12,7 @@ namespace Abp.NServiceBus.Blogs.Dto
     public class BlogDto : FullAuditedEntityDto
     {
         public string Name { get; set; }
+
+        public bool ForceException { get; set; }
     }
 }

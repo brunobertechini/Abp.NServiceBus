@@ -11,5 +11,7 @@ namespace Abp.NServiceBus.Blogs.Events
         public int BlogId { get; set; }
 
         public string Name { get; set; }
+
+        public bool ForceException { get; set; }
     }
 }

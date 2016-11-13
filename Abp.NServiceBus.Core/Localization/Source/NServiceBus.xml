@@ -63,5 +63,6 @@
     <text name="Delete" value="Delete" />
     <text name="AreYouSureToDeleteBlog" value="Are you sure to delete blog {0} ?" />
     <text name="SuccessfullyDeleted" value="Successfully deleted." />
+    <text name="ForceException" value="Force Exception" />
   </texts>
 </localizationDictionary>

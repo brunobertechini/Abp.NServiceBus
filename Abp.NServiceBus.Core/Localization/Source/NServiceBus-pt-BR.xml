@@ -52,5 +52,6 @@
     <text name="Delete" value="Deletar" />
     <text name="AreYouSureToDeleteBlog" value="Tem certeza que deseja remover o blog {0} ?" />
     <text name="SuccessfullyDeleted" value="Deletado com sucesso." />
+    <text name="ForceException" value="Forçar Exception" />
   </texts>
 </localizationDictionary>

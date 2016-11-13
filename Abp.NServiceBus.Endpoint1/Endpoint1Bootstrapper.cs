@@ -98,7 +98,7 @@ namespace Abp.NServiceBus
                 });
 
             // Configure Behavior for AbpNServiceBusSession
-            // endpointConfiguration.Pipeline.Register(typeof(AbpUnitOfWorkBehavior), "AbpUnitOfWorkBehavior");
+            endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusUnitOfWork), typeof(AbpNServiceBusUnitOfWork).Name);
 
             // Enable Installers & Start Endpoint
             endpointConfiguration.EnableInstallers();

@@ -16,7 +16,7 @@ namespace Abp.NServiceBus
             IocManager.Register<AbpNServiceBusModuleConfig>();
 
             // Default IsolationLevel
-            Configuration.UnitOfWork.Scope = System.Transactions.TransactionScopeOption.Required;
+            //Configuration.UnitOfWork.Scope = System.Transactions.TransactionScopeOption.Required;
             Configuration.UnitOfWork.IsTransactional = false;
             Configuration.UnitOfWork.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
 

@@ -45,6 +45,7 @@
     <Compile Include="Blogs\Events\BlogChanged.cs" />
     <Compile Include="Blogs\Events\BlogCreated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Commands\CommandThatWillFail.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,6 +12,12 @@
                 <input type="text" name="Name" class="form-control" ng-model="vm.blog.name" required>
             </div>
 
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="ForceException" ng-model="vm.blog.forceException" value="true"> @L("ForceException")
+                </label>
+            </div>
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>

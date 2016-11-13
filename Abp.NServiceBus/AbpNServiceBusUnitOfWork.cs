@@ -1,4 +1,6 @@
-﻿using Abp.Domain.Uow;
+﻿using Abp.Dependency;
+using Abp.Domain.Uow;
+using Abp.Runtime.Session;
 using NServiceBus.Pipeline;
 using System;
 using System.Collections.Generic;
@@ -10,37 +12,35 @@ namespace Abp.NServiceBus
 {
     public class AbpNServiceBusUnitOfWork : Behavior<IIncomingPhysicalMessageContext>
     {
-        //private AbpNServiceBusSession _session;
-        //private IUnitOfWorkManager _uowManager;
-
-        public override Task Invoke(IIncomingPhysicalMessageContext context, Func<Task> next)
+        public override async Task Invoke(IIncomingPhysicalMessageContext context, Func<Task> next)
         {
-            //Console.WriteLine($"AbpUnitOfWorkBehavior: Processing Message {context.Message.MessageId} ");
+            // Get instance of AbpNServiceBusSession
+            IAbpSession session = IocManager.Instance.Resolve<IAbpSession>();
+            AbpNServiceBusSession nsbSession = session as AbpNServiceBusSession;
 
-            //_session = IocManager.Instance.Resolve<IAbpSession>() as AbpNServiceBusSession;
-            //_uowManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
+            // Set AbpSession properties from Headers
+            nsbSession.SetHeaders(context.MessageHeaders.ToDictionary(x => x.Key, y => y.Value));
 
-            //try
-            //{
-            //    _session.SetHeaders(context.MessageHeaders.ToDictionary(x => x.Key, y => y.Value));
+            // Get instance of UnitOfWorkManager
+            IUnitOfWorkManager uowManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
+            IUnitOfWorkCompleteHandle unitOfWork;
 
-            //    var handle = _uowManager.Begin();
+            try
+            {
+                // Start UnitOfWork if
+                unitOfWork = uowManager.Begin();
 
-            //    handle.Complete();
+                // Call next step in pipeline
+                await next();
 
-            //    await next();
-
-            //    await _uowManager.Current.SaveChangesAsync();
-
-            //    Console.Out.WriteLine($"AbpUnitOfWorkBehavior: Message {context.MessageId}: Session {_session.GetHashCode()} UOW {_uowManager.GetHashCode()} was committed");
-            //}
-            //catch (Exception)
-            //{
-            //    Console.Out.WriteLine($"AbpUnitOfWorkBehavior: Message {context.MessageId}: Session {_session.GetHashCode()} UOW {_uowManager.GetHashCode()} was rolled back");
-            //    throw;
-            //}
-
-            return next();
+                // Complete UnitOfWork if no exception is raised
+                await unitOfWork.CompleteAsync();
+            }
+            catch (Exception)
+            {
+                // Does not Complete UnitOfWork
+                throw;
+            }
         }
     }
 }

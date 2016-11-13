@@ -27,6 +27,7 @@ namespace Abp.NServiceBus.Blogs
             {
                 evt.BlogId = blog.Id;
                 evt.Name = blog.Name;
+                evt.ForceException = message.ForceException;
             });
         }
     }

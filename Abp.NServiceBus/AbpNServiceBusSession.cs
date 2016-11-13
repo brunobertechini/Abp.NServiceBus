@@ -49,6 +49,9 @@ namespace Abp.NServiceBus
                 string value;
                 if (_headers.TryGetValue(MessageHeaders.TenantId, out value))
                 {
+                    if (string.IsNullOrEmpty(value))
+                        return null;
+
                     return Convert.ToInt32(value);
                 }
 
@@ -64,6 +67,9 @@ namespace Abp.NServiceBus
                 string value;
                 if (_headers.TryGetValue(MessageHeaders.ImpersonatorTenantId, out value))
                 {
+                    if (string.IsNullOrEmpty(value))
+                        return null;
+
                     return Convert.ToInt32(value);
                 }
 
@@ -78,6 +84,9 @@ namespace Abp.NServiceBus
                 string value;
                 if (_headers.TryGetValue(MessageHeaders.UserId, out value))
                 {
+                    if (string.IsNullOrEmpty(value))
+                        return null;
+
                     return Convert.ToInt64(value);
                 }
 
@@ -92,6 +101,9 @@ namespace Abp.NServiceBus
                 string value;
                 if (_headers.TryGetValue(MessageHeaders.ImpersonatorUserId, out value))
                 {
+                    if (string.IsNullOrEmpty(value))
+                        return null;
+
                     return Convert.ToInt64(value);
                 }
 
