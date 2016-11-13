@@ -13,8 +13,11 @@ namespace Abp.NServiceBus.Blogs.Dto
     {
         public string Name { get; set; }
 
-        public bool ForceBlogException { get; set; }
+        public bool ForceExceptionAtApiController { get; set; }
 
-        public bool ForceBlogHistoryException { get; set; }
+        public bool ForceExceptionAtPublishBlogEventHandler { get; set; }
+
+        public bool ForceExceptionAtBlogHistoryHandler { get; set; }
+        
     }
 }

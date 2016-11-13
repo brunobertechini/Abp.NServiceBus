@@ -14,13 +14,19 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="ForceBlogException" ng-model="vm.blog.forceBlogException" value="true"> @L("ForceBlogException")
+                    <input type="checkbox" name="ForceExceptionAtApiController" ng-model="vm.blog.forceExceptionAtApiController" value="true"> @L("ForceExceptionAtApiController")
                 </label>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="ForceBlogHistoryException" ng-model="vm.blog.forceBlogHistoryException" value="true"> @L("ForceBlogHistoryException")
+                    <input type="checkbox" name="ForceExceptionAtPublishBlogEventHandler" ng-model="vm.blog.forceExceptionAtPublishBlogEventHandler" value="true"> @L("ForceExceptionAtPublishBlogEventHandler")
+                </label>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="ForceExceptionAtBlogHistoryHandler" ng-model="vm.blog.forceExceptionAtBlogHistoryHandler" value="true"> @L("ForceExceptionAtBlogHistoryHandler")
                 </label>
             </div>
 

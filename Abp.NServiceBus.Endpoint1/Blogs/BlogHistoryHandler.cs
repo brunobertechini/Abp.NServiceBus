@@ -77,7 +77,7 @@ namespace Abp.NServiceBus.Blogs
             });
 
             if (message.ForceException)
-                throw new Exception("Forced Exception");
+                throw new Exception("ForceException");
         }
     }
 }

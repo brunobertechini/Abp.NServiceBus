@@ -63,7 +63,8 @@
     <text name="Delete" value="Delete" />
     <text name="AreYouSureToDeleteBlog" value="Are you sure to delete blog {0} ?" />
     <text name="SuccessfullyDeleted" value="Successfully deleted." />
-    <text name="ForceBlogException" value="Force Exception on PublishBlog{Created/Changed}Handler" />
-    <text name="ForceBlogHistoryException" value="Force Exception on BlogHistoryHandler" />
+    <text name="ForceExceptionAtApiController" value="Force Exception at Api Controller" />
+    <text name="ForceExceptionAtPublishBlogEventHandler" value="Force Exception at PublishBlog{Created/Changed}Handler" />
+    <text name="ForceExceptionAtBlogHistoryHandler" value="Force Exception at BlogHistoryHandler" />
   </texts>
 </localizationDictionary>

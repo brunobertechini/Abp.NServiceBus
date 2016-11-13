@@ -9,7 +9,7 @@ namespace Abp.NServiceBus
 {
     public static class AbpNServiceBusModuleExtensions
     {
-        public static AbpNServiceBusModuleConfig ErpCommerceNServiceBusModule(this IModuleConfigurations moduleConfigurations)
+        public static AbpNServiceBusModuleConfig NServiceBus(this IModuleConfigurations moduleConfigurations)
         {
             return moduleConfigurations.AbpConfiguration.Get<AbpNServiceBusModuleConfig>();
         }

@@ -27,10 +27,17 @@ namespace Abp.NServiceBus.Web
         typeof(NServiceBusWebApiModule),
         typeof(AbpWebSignalRModule),
         //typeof(AbpHangfireModule), - ENABLE TO USE HANGFIRE INSTEAD OF DEFAULT JOB MANAGER
-        typeof(AbpWebMvcModule))]
+        typeof(AbpWebMvcModule),
+        typeof(AbpNServiceBusModule)
+    )]
     public class NServiceBusWebModule : AbpModule
     {
         public const string EndpointName = "Abp.NServiceBus.Web";
+
+        public NServiceBusWebModule(AbpNServiceBusModule nsbModule)
+        {
+            nsbModule.UseAbpNServiceBusSession = false;
+        }
 
         public override void PreInitialize()
         {
@@ -110,13 +117,6 @@ namespace Abp.NServiceBus.Web
                 customizations: customizations =>
                 {
                     customizations.ExistingContainer(IocManager.IocContainer);
-                });
-
-            // Configure mutator to add AbpSession headers to all output messages
-            endpointConfiguration.RegisterComponents(
-                registration: components =>
-                {
-                    components.ConfigureComponent<AbpNServiceBusSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
                 });
 
             // Enable Installers & Start Endpoint

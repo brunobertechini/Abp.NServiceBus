@@ -8,5 +8,6 @@ namespace Abp.NServiceBus
 {
     public class AbpNServiceBusModuleConfig
     {
+        
     }
 }

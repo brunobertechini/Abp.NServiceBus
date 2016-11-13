@@ -41,9 +41,12 @@ namespace Abp.NServiceBus.Blogs
             await _endpointInstance.Send<PublishBlogCreated>(cmd =>
             {
                 cmd.BlogId = blog.Id;
-                cmd.ForceBlogException = input.ForceBlogException;
-                cmd.ForceBlogHistoryException = input.ForceBlogHistoryException;
+                cmd.ForceExceptionAtPublishBlogEventHandler = input.ForceExceptionAtPublishBlogEventHandler;
+                cmd.ForceExceptionAtBlogHistoryHandler = input.ForceExceptionAtBlogHistoryHandler;
             });
+
+            if (input.ForceExceptionAtApiController)
+                throw new Exception("ForceExceptionAtApiController");
         }
 
         public async Task DeleteBlog(BlogDto input)
@@ -70,12 +73,15 @@ namespace Abp.NServiceBus.Blogs
             var blog = await _blogRepository.GetAsync(input.Id);
             input.MapTo(blog);
 
-            await _endpointInstance.Send<PublishBlogChanged>(cmd =>
+            await _endpointInstance.Send<PublishBlogCreated>(cmd =>
             {
                 cmd.BlogId = blog.Id;
-                cmd.ForceBlogException = input.ForceBlogException;
-                cmd.ForceBlogHistoryException = input.ForceBlogHistoryException;
+                cmd.ForceExceptionAtPublishBlogEventHandler = input.ForceExceptionAtPublishBlogEventHandler;
+                cmd.ForceExceptionAtBlogHistoryHandler = input.ForceExceptionAtBlogHistoryHandler;
             });
+
+            if (input.ForceExceptionAtApiController)
+                throw new Exception("ForceExceptionAtApiController");
         }
     }
 }

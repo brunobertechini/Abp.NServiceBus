@@ -10,8 +10,8 @@ namespace Abp.NServiceBus.Blogs.Commands
     {
         public int BlogId { get; set; }
 
-        public bool ForceBlogException { get; set; }
+        public bool ForceExceptionAtPublishBlogEventHandler { get; set; }
 
-        public bool ForceBlogHistoryException { get; set; }
+        public bool ForceExceptionAtBlogHistoryHandler { get; set; }
     }
 }

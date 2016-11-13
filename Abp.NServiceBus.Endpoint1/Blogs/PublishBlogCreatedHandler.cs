@@ -44,11 +44,11 @@ namespace Abp.NServiceBus.Blogs
             {
                 evt.BlogId = blog.Id;
                 evt.Name = blog.Name;
-                evt.ForceException = message.ForceBlogHistoryException;
+                evt.ForceException = message.ForceExceptionAtBlogHistoryHandler;
             });
 
-            if (message.ForceBlogException)
-                throw new Exception("Forced");
+            if (message.ForceExceptionAtPublishBlogEventHandler)
+                throw new Exception("ForceExceptionAtPublishBlogEventHandler");
         }
     }
 }

@@ -79,13 +79,6 @@ namespace Abp.NServiceBus
                     customizations.ExistingContainer(IocManager.IocContainer);
                 });
 
-            // Configure mutator to add AbpSession headers to all output messages
-            endpointConfiguration.RegisterComponents(
-                registration: components =>
-                {
-                    components.ConfigureComponent<AbpNServiceBusSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
-                });
-
             // Configure Behavior for AbpNServiceBusSession
             endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusUnitOfWork), typeof(AbpNServiceBusUnitOfWork).Name);
 
