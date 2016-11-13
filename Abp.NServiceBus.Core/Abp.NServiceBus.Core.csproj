@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blogs\BlogHistory.cs" />
     <Compile Include="NServiceBusConsts.cs" />
     <Compile Include="NServiceBusCoreModule.cs" />
     <Compile Include="Authorization\NServiceBusAuthorizationProvider.cs" />

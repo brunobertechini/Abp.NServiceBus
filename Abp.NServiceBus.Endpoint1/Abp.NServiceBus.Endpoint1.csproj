@@ -151,6 +151,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blogs\BlogHistoryHandler.cs" />
     <Compile Include="Blogs\PublishBlogChangedHandler.cs" />
     <Compile Include="Blogs\PublishBlogCreatedHandler.cs" />
     <Compile Include="Endpoint1Bootstrapper.cs" />
