@@ -1,2 +1,2 @@
 # Abp.NServiceBus
-AspNet Boilerplate with NServiceBus
+AspNet Boilerplate with NServiceBus - Tests
