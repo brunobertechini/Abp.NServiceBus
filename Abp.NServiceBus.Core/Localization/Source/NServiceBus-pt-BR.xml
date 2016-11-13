@@ -52,6 +52,7 @@
     <text name="Delete" value="Deletar" />
     <text name="AreYouSureToDeleteBlog" value="Tem certeza que deseja remover o blog {0} ?" />
     <text name="SuccessfullyDeleted" value="Deletado com sucesso." />
-    <text name="ForceException" value="Forçar Exception" />
+    <text name="ForceBlogException" value="Force Exception on PublishBlog{Created/Changed}Handler" />
+    <text name="ForceBlogHistoryException" value="Force Exception on BlogHistoryHandler" />
   </texts>
 </localizationDictionary>
