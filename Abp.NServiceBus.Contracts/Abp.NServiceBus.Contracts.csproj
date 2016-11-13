@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Blogs\Commands\PublishBlogChanged.cs" />
     <Compile Include="Blogs\Commands\PublishBlogCreated.cs" />
+    <Compile Include="Blogs\Events\BlogChanged.cs" />
+    <Compile Include="Blogs\Events\BlogCreated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

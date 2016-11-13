@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.NServiceBus", "Abp.NSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.NServiceBus.Contracts", "Abp.NServiceBus.Contracts\Abp.NServiceBus.Contracts.csproj", "{D83BC17E-7091-4DFB-AA5E-D28F04D15F48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.NServiceBus.Endpoint1", "Abp.NServiceBus.Endpoint1\Abp.NServiceBus.Endpoint1.csproj", "{B625DA73-3483-4B09-AE5B-2A3BF0DC427D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{D83BC17E-7091-4DFB-AA5E-D28F04D15F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83BC17E-7091-4DFB-AA5E-D28F04D15F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83BC17E-7091-4DFB-AA5E-D28F04D15F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B625DA73-3483-4B09-AE5B-2A3BF0DC427D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B625DA73-3483-4B09-AE5B-2A3BF0DC427D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B625DA73-3483-4B09-AE5B-2A3BF0DC427D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B625DA73-3483-4B09-AE5B-2A3BF0DC427D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

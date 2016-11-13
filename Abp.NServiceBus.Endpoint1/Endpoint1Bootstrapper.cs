@@ -1,67 +1,45 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using Abp.Hangfire;
-using Abp.Hangfire.Configuration;
+﻿using Abp.Dependency;
 using Abp.Modules;
-using Abp.Web.Mvc;
-using Abp.Web.SignalR;
-using Abp.Zero.Configuration;
-using Abp.NServiceBus.Api;
-using Hangfire;
-using NServiceBus;
-using System;
-using NServiceBus.Logging;
-using System.Web;
+using Abp.Runtime.Session;
 using Castle.MicroKernel.Registration;
-using NServiceBus.Transport.SQLServer;
+using NServiceBus;
 using NServiceBus.Persistence;
+using NServiceBus.Transport.SQLServer;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Abp.NServiceBus.Web
+namespace Abp.NServiceBus
 {
     [DependsOn(
-        typeof(NServiceBusDataModule),
+        typeof(NServiceBusCoreModule),
         typeof(NServiceBusApplicationModule),
-        typeof(NServiceBusWebApiModule),
-        typeof(AbpWebSignalRModule),
-        //typeof(AbpHangfireModule), - ENABLE TO USE HANGFIRE INSTEAD OF DEFAULT JOB MANAGER
-        typeof(AbpWebMvcModule))]
-    public class NServiceBusWebModule : AbpModule
+        typeof(NServiceBusDataModule),
+        typeof(AbpNServiceBusModule)
+    )]
+    public class Endpoint1Bootstrapper : AbpModule
     {
-        public const string EndpointName = "Abp.NServiceBus.Web";
+        public const string EndpointName = "Abp.NServiceBus.Endpoint1";
 
         public override void PreInitialize()
         {
-            //Enable database based localization
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
-
-            //Configure navigation/menu
-            Configuration.Navigation.Providers.Add<NServiceBusNavigationProvider>();
-
-            //Configure Hangfire - ENABLE TO USE HANGFIRE INSTEAD OF DEFAULT JOB MANAGER
-            //Configuration.BackgroundJobs.UseHangfire(configuration =>
-            //{
-            //    configuration.GlobalConfiguration.UseSqlServerStorage("Default");
-            //});
+            Configuration.ReplaceService(typeof(IAbpSession), () =>
+            {
+                IocManager.Register<IAbpSession, AbpNServiceBusSession>(DependencyLifeStyle.Singleton);
+            });
         }
 
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-
-            AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
         public override void PostInitialize()
         {
-            Console.WriteLine(string.Format("Starting NServiceBus Endpoint {0}...", EndpointName));
-
-            var defaultFactory = LogManager.Use<DefaultFactory>();
-            defaultFactory.Directory(HttpContext.Current.Server.MapPath("~/App_Data/Logs/"));
-
             var endpointConfiguration = new EndpointConfiguration(EndpointName);
             endpointConfiguration.PurgeOnStartup(false);
             endpointConfiguration.SendFailedMessagesTo("error");
@@ -118,6 +96,9 @@ namespace Abp.NServiceBus.Web
                 {
                     components.ConfigureComponent<AbpNServiceBusWebSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
                 });
+
+            // Configure Behavior for AbpNServiceBusSession
+            // endpointConfiguration.Pipeline.Register(typeof(AbpUnitOfWorkBehavior), "AbpUnitOfWorkBehavior");
 
             // Enable Installers & Start Endpoint
             endpointConfiguration.EnableInstallers();

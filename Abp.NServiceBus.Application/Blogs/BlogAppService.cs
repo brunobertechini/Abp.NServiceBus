@@ -9,6 +9,7 @@ using Abp.Domain.Repositories;
 using NServiceBus;
 using Abp.AutoMapper;
 using Abp.NServiceBus.Blogs.Commands;
+using Abp.Domain.Uow;
 
 namespace Abp.NServiceBus.Blogs
 {
@@ -16,12 +17,15 @@ namespace Abp.NServiceBus.Blogs
     {
         private readonly IEndpointInstance _endpointInstance;
         private readonly IRepository<Blog> _blogRepository;
+        private readonly IUnitOfWorkManager _uowManager;
         
         public BlogAppService(
+            IUnitOfWorkManager uowManager,
             IEndpointInstance endpointInstance,
             IRepository<Blog> blogRepository
         )
         {
+            _uowManager = uowManager;
             _endpointInstance = endpointInstance;
             _blogRepository = blogRepository;
         }
@@ -30,6 +34,9 @@ namespace Abp.NServiceBus.Blogs
         {
             var blog = input.MapTo<Blog>();
             await _blogRepository.InsertAsync(blog);
+
+            // Abp Standard: To get Entity<int> id before send command
+            await _uowManager.Current.SaveChangesAsync();
 
             await _endpointInstance.Send<PublishBlogCreated>(cmd =>
             {

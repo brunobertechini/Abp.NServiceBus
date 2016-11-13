@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Abp.NServiceBus
 {
-    public class AbpWebSessionHeaderAppender : IMutateOutgoingTransportMessages
+    public class AbpNServiceBusWebSessionHeaderAppender : IMutateOutgoingTransportMessages
     {
         private readonly IAbpSession _session;
 
-        public AbpWebSessionHeaderAppender(IAbpSession session)
+        public AbpNServiceBusWebSessionHeaderAppender(IAbpSession session)
         {
             _session = session;
         }
