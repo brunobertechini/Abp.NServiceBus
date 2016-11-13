@@ -1,24 +1,28 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
-using Abp.Domain.Repositories;
-using Abp.NServiceBus.Blogs.Commands;
-using Abp.NServiceBus.Blogs.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
+using Abp.NServiceBus.Blogs.Dto;
+using Abp.Domain.Repositories;
+using NServiceBus;
+using Abp.AutoMapper;
+using Abp.NServiceBus.Blogs.Commands;
 
 namespace Abp.NServiceBus.Blogs
 {
     public class BlogAppService : NServiceBusAppServiceBase, IBlogAppService
     {
+        private readonly IEndpointInstance _endpointInstance;
         private readonly IRepository<Blog> _blogRepository;
         
         public BlogAppService(
+            IEndpointInstance endpointInstance,
             IRepository<Blog> blogRepository
         )
         {
+            _endpointInstance = endpointInstance;
             _blogRepository = blogRepository;
         }
 
@@ -26,6 +30,11 @@ namespace Abp.NServiceBus.Blogs
         {
             var blog = input.MapTo<Blog>();
             await _blogRepository.InsertAsync(blog);
+
+            await _endpointInstance.Send<PublishBlogCreated>(cmd =>
+            {
+                cmd.BlogId = blog.Id;
+            });
         }
 
         public async Task DeleteBlog(BlogDto input)
@@ -51,6 +60,11 @@ namespace Abp.NServiceBus.Blogs
         {
             var blog = await _blogRepository.GetAsync(input.Id);
             input.MapTo(blog);
+
+            await _endpointInstance.Send<PublishBlogChanged>(cmd =>
+            {
+                cmd.BlogId = blog.Id;
+            });
         }
     }
 }

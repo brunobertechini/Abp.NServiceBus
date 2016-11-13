@@ -18,7 +18,7 @@ namespace Abp.NServiceBus.EntityFramework
          *   pass connection string name to base classes. ABP works either way.
          */
         public NServiceBusDbContext()
-            : base("Default")
+            : base(NServiceBusConsts.ConnectionStringName)
         {
 
         }

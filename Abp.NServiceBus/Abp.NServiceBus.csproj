@@ -91,6 +91,7 @@
     <Compile Include="AbpNServiceBusModule.cs" />
     <Compile Include="AbpNServiceBusModuleConfig.cs" />
     <Compile Include="AbpNServiceBusModuleExtensions.cs" />
+    <Compile Include="AbpWebSessionHeaderAppender.cs" />
     <Compile Include="MessageConventionExtensions.cs" />
     <Compile Include="MessageHeaders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

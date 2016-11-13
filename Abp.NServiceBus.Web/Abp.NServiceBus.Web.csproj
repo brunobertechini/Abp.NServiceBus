@@ -135,6 +135,10 @@
       <HintPath>..\packages\Hangfire.SqlServer.1.6.5\lib\net45\Hangfire.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -192,6 +196,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nito.AsyncEx, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
       <Private>True</Private>
@@ -202,6 +210,22 @@
     </Reference>
     <Reference Include="Nito.AsyncEx.Enlightenment, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.6.0.0\lib\net452\NServiceBus.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NServiceBus.NHibernate, Version=7.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.NHibernate.7.0.1\lib\net452\NServiceBus.NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NServiceBus.ObjectBuilder.CastleWindsor, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.CastleWindsor.6.0.0\lib\net452\NServiceBus.ObjectBuilder.CastleWindsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NServiceBus.Transport.SQLServer, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.SqlServer.3.0.0\lib\net452\NServiceBus.Transport.SQLServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -1300,6 +1324,10 @@
       <Project>{edf5d964-4c0f-4f19-b674-58a38a5e5401}</Project>
       <Name>Abp.NServiceBus.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Abp.NServiceBus.Contracts\Abp.NServiceBus.Contracts.csproj">
+      <Project>{d83bc17e-7091-4dfb-aa5e-d28f04d15f48}</Project>
+      <Name>Abp.NServiceBus.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abp.NServiceBus.Core\Abp.NServiceBus.Core.csproj">
       <Project>{17298ea0-af73-4f30-b6f1-2066100d7d74}</Project>
       <Name>Abp.NServiceBus.Core</Name>
@@ -1311,6 +1339,10 @@
     <ProjectReference Include="..\Abp.NServiceBus.WebApi\Abp.NServiceBus.WebApi.csproj">
       <Project>{5eb52d3d-09fd-463a-b02a-8d9856bd3724}</Project>
       <Name>Abp.NServiceBus.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Abp.NServiceBus\Abp.NServiceBus.csproj">
+      <Project>{e8543de9-c9e8-4be5-a4c7-6768d5148e2e}</Project>
+      <Name>Abp.NServiceBus</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
