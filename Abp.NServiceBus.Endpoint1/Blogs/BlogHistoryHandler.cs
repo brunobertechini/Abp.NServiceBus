@@ -54,6 +54,7 @@ namespace Abp.NServiceBus.Blogs
                 Action = "Created Test2"
             });
 
+
             await _blogHistoryRepository.InsertAsync(new BlogHistory()
             {
                 BlogId = message.BlogId,
@@ -64,7 +65,7 @@ namespace Abp.NServiceBus.Blogs
             blog.Name = blog.Name + DateTime.Now.ToString();
 
             if (message.ForceException)
-                throw new Exception("Forced Exception");
+                blog.Name = null; // Force Abp Entity Validation
         }
 
         public async Task Handle(BlogChanged message, IMessageHandlerContext context)

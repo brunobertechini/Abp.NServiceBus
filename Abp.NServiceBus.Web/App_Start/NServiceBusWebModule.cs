@@ -116,7 +116,7 @@ namespace Abp.NServiceBus.Web
             endpointConfiguration.RegisterComponents(
                 registration: components =>
                 {
-                    components.ConfigureComponent<AbpNServiceBusWebSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
+                    components.ConfigureComponent<AbpNServiceBusSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
                 });
 
             // Enable Installers & Start Endpoint

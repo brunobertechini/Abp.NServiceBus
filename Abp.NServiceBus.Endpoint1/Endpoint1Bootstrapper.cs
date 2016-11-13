@@ -68,7 +68,7 @@ namespace Abp.NServiceBus
                 })
                 .Delayed(customizations: delayed =>
                 {
-                    delayed.NumberOfRetries(0);
+                    delayed.NumberOfRetries(3);
                     delayed.TimeIncrease(TimeSpan.FromSeconds(30));
                 });
 
@@ -83,7 +83,7 @@ namespace Abp.NServiceBus
             endpointConfiguration.RegisterComponents(
                 registration: components =>
                 {
-                    components.ConfigureComponent<AbpNServiceBusWebSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
+                    components.ConfigureComponent<AbpNServiceBusSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
                 });
 
             // Configure Behavior for AbpNServiceBusSession
