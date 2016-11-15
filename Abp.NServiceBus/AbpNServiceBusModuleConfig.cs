@@ -9,5 +9,7 @@ namespace Abp.NServiceBus
     public class AbpNServiceBusModuleConfig
     {
         public string EndpointName { get; set; }
+
+        public bool Debug { get; set; }
     }
 }

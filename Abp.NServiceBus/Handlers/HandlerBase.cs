@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Uow;
+﻿using Abp.Dependency;
+using Abp.Domain.Uow;
 using Abp.Runtime.Session;
 using NServiceBus;
 using NServiceBus.Logging;
@@ -18,7 +19,9 @@ namespace Abp.NServiceBus
 
         protected IUnitOfWorkManager UowManager { get; private set; }
 
-        public HandlerBase(IAbpSession session, IUnitOfWorkManager uowManager)
+        public HandlerBase(
+            IAbpSession session, 
+            IUnitOfWorkManager uowManager)
         {
             AbpSession = session;
             UowManager = uowManager;
@@ -26,12 +29,16 @@ namespace Abp.NServiceBus
 
         protected void LogContextInfo(IMessageHandlerContext context)
         {
-            Logger.DebugFormat("Message: {0}", context.MessageId);
-            Logger.DebugFormat("Message/AbpSession: {0}/{1}", context.MessageId, AbpSession.GetHashCode());
-            Logger.DebugFormat("Message/UowManager: {0}/{1}", context.MessageId, UowManager.GetHashCode());
+            var config = IocManager.Instance.Resolve<AbpNServiceBusModuleConfig>();
+            if (config.Debug)
+            {
+                Logger.DebugFormat("Message: {0}", context.MessageId);
+                Logger.DebugFormat("Message/AbpSession: {0}/{1}", context.MessageId, AbpSession.GetHashCode());
+                Logger.DebugFormat("Message/UowManager: {0}/{1}", context.MessageId, UowManager.GetHashCode());
 
-            if (UowManager.Current != null)
-                Logger.DebugFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, UowManager.Current.GetHashCode());
+                if (UowManager.Current != null)
+                    Logger.DebugFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, UowManager.Current.GetHashCode());
+            }
         }
     }
 }

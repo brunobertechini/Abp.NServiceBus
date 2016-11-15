@@ -24,7 +24,6 @@ namespace Abp.NServiceBus
 
         public AbpNServiceBusSession(IMultiTenancyConfig multiTenancy)
         {
-            Logger.InfoFormat("Creating new instance: {0}", GetHashCode());
             _multiTenancy = multiTenancy;
         }
 

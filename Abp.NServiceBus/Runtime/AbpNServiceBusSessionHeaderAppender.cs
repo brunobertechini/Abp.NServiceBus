@@ -19,6 +19,8 @@ namespace Abp.NServiceBus
 
         public Task MutateOutgoing(MutateOutgoingTransportMessageContext context)
         {
+            // TODO Log when debug is enabled
+
             var outgoingHeaders = context.OutgoingHeaders;
 
             var tenantId = (_session.TenantId != null) ? _session.TenantId.Value.ToString() : "0";

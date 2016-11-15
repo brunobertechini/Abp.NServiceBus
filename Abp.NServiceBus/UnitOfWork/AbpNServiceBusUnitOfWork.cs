@@ -17,25 +17,25 @@ namespace Abp.NServiceBus
 
         public override async Task Invoke(IIncomingPhysicalMessageContext context, Func<Task> next)
         {
-            Logger.InfoFormat("Message: {0}", context.MessageId);
+            Logger.DebugFormat("Message: {0}", context.MessageId);
 
             // Get AbpSession
             IAbpSession session = IocManager.Instance.Resolve<IAbpSession>();
-            Logger.InfoFormat("Message/AbpSession: {0}/{1}", context.MessageId, session.GetHashCode());
+            Logger.DebugFormat("Message/AbpSession: {0}/{1}", context.MessageId, session.GetHashCode());
 
             AbpNServiceBusSession nsbSession = session as AbpNServiceBusSession;
             nsbSession.SetHeaders(context.MessageHeaders);
 
             // Get instance of UnitOfWorkManager
             IUnitOfWorkManager uowManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
-            Logger.InfoFormat("Message/UowManager: {0}/{1}", context.MessageId, uowManager.GetHashCode());
-            IUnitOfWorkCompleteHandle unitOfWork;
+            Logger.DebugFormat("Message/UowManager: {0}/{1}", context.MessageId, uowManager.GetHashCode());
 
+            IUnitOfWorkCompleteHandle unitOfWork;
             try
             {
-                // Start UnitOfWork if
+                // Start UnitOfWork
                 unitOfWork = uowManager.Begin();
-                Logger.InfoFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, uowManager.Current.GetHashCode());
+                Logger.DebugFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, uowManager.Current.GetHashCode());
 
                 // Call next step in pipeline
                 await next();
