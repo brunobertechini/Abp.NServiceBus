@@ -14,6 +14,9 @@ namespace Abp.NServiceBus
 {
     public class AbpNServiceBusModule : AbpModule
     {
+        /// <summary>
+        /// Indicate if Abp.NServiceBus should use custom IAbpSession (default: true)
+        /// </summary>
         public bool UseAbpNServiceBusSession { get; set; }
 
         public AbpNServiceBusModule()
