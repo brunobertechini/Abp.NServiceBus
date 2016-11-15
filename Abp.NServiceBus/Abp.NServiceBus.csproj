@@ -91,11 +91,11 @@
     <Compile Include="AbpNServiceBusModule.cs" />
     <Compile Include="AbpNServiceBusModuleConfig.cs" />
     <Compile Include="AbpNServiceBusModuleExtensions.cs" />
-    <Compile Include="AbpNServiceBusSession.cs" />
-    <Compile Include="AbpNServiceBusUnitOfWork.cs" />
-    <Compile Include="AbpNServiceBusSessionHeaderAppender.cs" />
-    <Compile Include="MessageConventionExtensions.cs" />
-    <Compile Include="MessageHeaders.cs" />
+    <Compile Include="Runtime\AbpNServiceBusSession.cs" />
+    <Compile Include="UnitOfWork\AbpNServiceBusUnitOfWork.cs" />
+    <Compile Include="Runtime\AbpNServiceBusSessionHeaderAppender.cs" />
+    <Compile Include="Messages\MessageConventionExtensions.cs" />
+    <Compile Include="Messages\MessageHeaders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
