@@ -15,22 +15,15 @@ namespace Abp.NServiceBus
     {
         protected ILog Logger = LogManager.GetLogger<T>();
 
-        protected IAbpSession AbpSession { get; private set; }
+        public IAbpSession AbpSession { get; set; }
 
-        protected IUnitOfWorkManager UowManager { get; private set; }
+        public IUnitOfWorkManager UowManager { get; set; }
 
-        public HandlerBase(
-            IAbpSession session, 
-            IUnitOfWorkManager uowManager)
-        {
-            AbpSession = session;
-            UowManager = uowManager;
-        }
+        public AbpNServiceBusModuleConfig AbpNServiceBusModuleConfig { get; set; }
 
         protected void LogContextInfo(IMessageHandlerContext context)
         {
-            var config = IocManager.Instance.Resolve<AbpNServiceBusModuleConfig>();
-            if (config.Debug)
+            if (AbpNServiceBusModuleConfig.Debug)
             {
                 Logger.DebugFormat("Message: {0}", context.MessageId);
                 Logger.DebugFormat("Message/AbpSession: {0}/{1}", context.MessageId, AbpSession.GetHashCode());
