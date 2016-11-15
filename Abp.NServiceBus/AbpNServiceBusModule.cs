@@ -58,5 +58,11 @@ namespace Abp.NServiceBus
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
 
+        public override void PostInitialize()
+        {
+            // Start NServiceBus Endpoint
+
+        }
+
     }
 }

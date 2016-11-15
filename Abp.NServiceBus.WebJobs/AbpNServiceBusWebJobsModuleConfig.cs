@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abp.NServiceBus
+namespace Abp.NServiceBus.WebJobs
 {
-    public class AbpNServiceBusModuleConfig
+    public class AbpNServiceBusWebJobsModuleConfig
     {
-        public string EndpointName { get; set; }
+        
     }
 }
