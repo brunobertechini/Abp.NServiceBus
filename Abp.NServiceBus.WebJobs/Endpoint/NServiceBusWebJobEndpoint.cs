@@ -22,8 +22,6 @@ namespace Abp.NServiceBus.WebJobs
             // Initialize Abp infrastructure
             var bootstrapper = AbpBootstrapper.Create(startupModule);
             bootstrapper.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("log4net.config"));
-            bootstrapper.IocManager.Resolve<IAbpStartupConfiguration>();
-
             bootstrapper.Initialize();
 
             // Lock until cancelled
