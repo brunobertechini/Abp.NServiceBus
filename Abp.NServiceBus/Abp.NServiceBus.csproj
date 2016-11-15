@@ -91,6 +91,7 @@
     <Compile Include="AbpNServiceBusModule.cs" />
     <Compile Include="AbpNServiceBusModuleConfig.cs" />
     <Compile Include="AbpNServiceBusModuleExtensions.cs" />
+    <Compile Include="Handlers\HandlerBase.cs" />
     <Compile Include="Runtime\AbpNServiceBusSession.cs" />
     <Compile Include="UnitOfWork\AbpNServiceBusUnitOfWork.cs" />
     <Compile Include="Runtime\AbpNServiceBusSessionHeaderAppender.cs" />
