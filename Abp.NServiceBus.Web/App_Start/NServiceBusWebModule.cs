@@ -98,7 +98,7 @@ namespace Abp.NServiceBus.Web
             persistence.UseConfiguration(nhConfiguration);
 
             // Unobtrusive Message Mode
-            endpointConfiguration.UseAbpMessageConventions();
+            endpointConfiguration.UseAbpNServiceBusMessageConventions();
 
             // Disable Immediate & Delayed Retries 
             endpointConfiguration.Recoverability()
