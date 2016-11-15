@@ -9,7 +9,7 @@ namespace Abp.NServiceBus
 {
     public static class MessageConventionExtensions
     {
-        public static void UseAbpMessageConventions(this EndpointConfiguration endpointConfiguration)
+        public static void UseAbpNServiceBusMessageConventions(this EndpointConfiguration endpointConfiguration)
         {
             var conventions = endpointConfiguration.Conventions();
             conventions.DefiningCommandsAs(type =>
