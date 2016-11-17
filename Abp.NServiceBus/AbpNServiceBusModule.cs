@@ -38,7 +38,7 @@ namespace Abp.NServiceBus
                         Component.For<IAbpSession>()
                                  .ImplementedBy<AbpNServiceBusSession>()
                                  .IsDefault()
-                                 .LifeStyle.Is(Castle.Core.LifestyleType.Scoped)
+                                 //.LifeStyle.Is(Castle.Core.LifestyleType.Scoped)
                     );
                 });
 
