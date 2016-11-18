@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NServiceBus;
+using NServiceBus.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,78 @@ using System.Threading.Tasks;
 
 namespace Abp.NServiceBus
 {
+    // TODO Implementar DataAnnotation validation
     public class AbpNServiceBusModuleConfig
     {
+        public AbpNServiceBusModuleConfig()
+        {
+            Debug = false;
+            EndpointName = null;
+            EndpointConfiguration = null;
+            LogDirectory = null;
+            DatabaseSchemaName = "nsb";
+            ImmediateRetries = 0;
+            DelayedRetries = 0;
+            DelayedRetriesTimeIncreaseInSeconds = 30;
+            LogLevel = null;
+            AuditQueue = "audit";
+            ErrorQueue = "error";
+        }
+
+        /// <summary>
+        /// Enable Debug
+        /// </summary>
+        public bool Debug { get; set; }
+
+        /// <summary>
+        /// Defines the Endpoint Name. Required.
+        /// </summary>
         public string EndpointName { get; set; }
 
-        public bool Debug { get; set; }
+        /// <summary>
+        /// Endpoint Configuration with Default Values
+        /// </summary>
+        public EndpointConfiguration EndpointConfiguration { get; set; }
+
+        /// <summary>
+        /// Directory where the NServiceBus Logs will be stored. Default: null (use root directory)
+        /// </summary>
+        public string LogDirectory { get; set; }
+
+        /// <summary>
+        /// Log Level
+        /// </summary>
+        public LogLevel? LogLevel { get; set; }
+
+        /// <summary>
+        /// Custom Database Schema Name. Default: "nsb".
+        /// </summary>
+        public string DatabaseSchemaName { get; set; }
+
+        public int ImmediateRetries { get; set; }
+
+        public int DelayedRetries { get; set; }
+
+        public int DelayedRetriesTimeIncreaseInSeconds { get; set; }
+
+        /// <summary>
+        /// Connection string for SqlServer Transport: Required.
+        /// </summary>
+        public string TransportConnectionString { get; set; }
+
+        /// <summary>
+        /// Connection string for NHibernate Persistence: Required.
+        /// </summary>
+        public string PersistenceConnectionString { get; set; }
+
+        /// <summary>
+        /// Audit Queue Name. Default: 'audit'.
+        /// </summary>
+        public string AuditQueue { get; set; }
+
+        /// <summary>
+        /// Error Queue Name. Default: 'error'.
+        /// </summary>
+        public string ErrorQueue { get; set; }
     }
 }
