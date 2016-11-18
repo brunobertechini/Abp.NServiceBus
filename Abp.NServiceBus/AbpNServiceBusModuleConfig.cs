@@ -56,10 +56,19 @@ namespace Abp.NServiceBus
         /// </summary>
         public string DatabaseSchemaName { get; set; }
 
+        /// <summary>
+        /// Number of ImmediateRetries to perform. Default: 0.
+        /// </summary>
         public int ImmediateRetries { get; set; }
 
+        /// <summary>
+        /// Number of DelayedRetries to perform. Default: 0.
+        /// </summary>
         public int DelayedRetries { get; set; }
 
+        /// <summary>
+        /// TimeIncrease in seconds between each DelayedRetries to perform. Default: 30.
+        /// </summary>
         public int DelayedRetriesTimeIncreaseInSeconds { get; set; }
 
         /// <summary>
