@@ -112,7 +112,9 @@
     <Compile Include="AbpNServiceBusModuleConfig.cs" />
     <Compile Include="AbpNServiceBusModuleExtensions.cs" />
     <Compile Include="Handlers\HandlerBase.cs" />
+    <Compile Include="Persistence\AbpNServiceBusPersistenceExtensions.cs" />
     <Compile Include="Runtime\AbpNServiceBusSession.cs" />
+    <Compile Include="Transport\AbpNServiceBusTransportExtensions.cs" />
     <Compile Include="UnitOfWork\AbpNServiceBusUnitOfWork.cs" />
     <Compile Include="Runtime\AbpNServiceBusSessionHeaderAppender.cs" />
     <Compile Include="Messages\MessageConventionExtensions.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

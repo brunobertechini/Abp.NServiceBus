@@ -31,7 +31,7 @@ namespace Abp.NServiceBus
         public override void PreInitialize()
         {
             // Module Config
-            IocManager.Register<AbpNServiceBusModuleConfig>();
+            IocManager.Register<AbpNServiceBusModuleConfig>(DependencyLifeStyle.Singleton);
 
             if (UseAbpNServiceBusSession)
             {
@@ -77,28 +77,10 @@ namespace Abp.NServiceBus
             endpointConfiguration.AuditProcessedMessagesTo(config.AuditQueue);
 
             // Transport
-            var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
+            endpointConfiguration.ConfigureAbpNServiceBusDefaultTransport();
 
-            if (!string.IsNullOrEmpty(config.TransportConnectionString))
-                transport.ConnectionString(config.TransportConnectionString);
-
-            if (!string.IsNullOrEmpty(config.DatabaseSchemaName))
-                transport.DefaultSchema(config.DatabaseSchemaName);
-
-           // Persistence
-           var nhConfiguration = new NHibernate.Cfg.Configuration
-           {
-               Properties =
-               {
-                    ["dialect"] = "NHibernate.Dialect.MsSql2012Dialect",
-                    ["connection.provider"] = "NHibernate.Connection.DriverConnectionProvider",
-                    ["connection.driver_class"] = "NHibernate.Driver.SqlClientDriver",
-                    ["default_schema"] = config.DatabaseSchemaName,
-                    ["connection.connection_string"] = config.PersistenceConnectionString
-               }
-           };
-            var persistence = endpointConfiguration.UsePersistence<NHibernatePersistence>();
-            persistence.UseConfiguration(nhConfiguration);
+            // Persistence
+            endpointConfiguration.ConfigureAbpNServiceBusDefaultPersistence();
 
             // Unobtrusive Message Mode
             endpointConfiguration.UseAbpNServiceBusMessageConventions();
