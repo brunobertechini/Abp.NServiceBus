@@ -18,9 +18,12 @@ namespace Abp.NServiceBus.WebJobs
 
         public ILogger Logger { get; set; }
 
-        public WebJobUtils()
+        private readonly AbpBootstrapper _bootstrapper;
+
+        public WebJobUtils(AbpBootstrapper bootstrapper)
         {
             Logger = NullLogger.Instance;
+            _bootstrapper = bootstrapper;
         }
 
         public void RunAndWait()
@@ -49,7 +52,7 @@ namespace Abp.NServiceBus.WebJobs
                 Thread.Sleep(3000);
             }
 
-            Logger.InfoFormat("WebJobUtils: Stopped {0}", DateTime.UtcNow);
+            Logger.InfoFormat("WebJobUtils: Stop requested {0}", DateTime.UtcNow);
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
@@ -59,6 +62,7 @@ namespace Abp.NServiceBus.WebJobs
             if (e.FullPath.IndexOf(Path.GetFileName(_shutdownFile), StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Logger.InfoFormat("Shutdown file detected, stopping...");
+
                 // Found the file mark this WebJob as finished
                 _running = false;
             }
