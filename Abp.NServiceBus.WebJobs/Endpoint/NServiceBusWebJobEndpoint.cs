@@ -1,6 +1,8 @@
 ﻿using Abp;
 using Abp.Configuration.Startup;
+using Abp.Dependency;
 using Abp.Modules;
+using Castle.Core.Logging;
 using Castle.Facilities.Logging;
 using Microsoft.Azure.WebJobs;
 using System;
@@ -26,7 +28,7 @@ namespace Abp.NServiceBus.WebJobs
 
             // Lock until cancelled
             Console.WriteLine("Lock Thread using WebJobUtils...");
-            WebJobUtils.RunAndWait(log);
+            IocManager.Instance.Resolve<WebJobUtils>().RunAndWait();
 
             // Dispose Abp
             Console.WriteLine("Thread released, disposing Abp...");

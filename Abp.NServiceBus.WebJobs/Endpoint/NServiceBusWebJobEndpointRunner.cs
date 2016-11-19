@@ -18,14 +18,7 @@ namespace Abp.NServiceBus.WebJobs
     public class NServiceBusWebJobEndpointRunner<TStartupModule>
         where TStartupModule : AbpModule
     {
-        private readonly string _endpointName;
-
-        public NServiceBusWebJobEndpointRunner(string endpointName)
-        {
-            _endpointName = endpointName;
-        }
-
-        public static void Run()
+        public void Run()
         {
             // TODO Validate if TStartupModule depends on NServiceBus/WebJobs Module
 
@@ -48,8 +41,18 @@ namespace Abp.NServiceBus.WebJobs
                 host = new JobHost();
             }
 
-            host.Call<TStartupModule>();
-            host.RunAndBlock();
+            try
+            {
+                host.Call<TStartupModule>();
+                host.RunAndBlock();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Fatal Exception");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                throw ex;
+            }
         }
 
     }

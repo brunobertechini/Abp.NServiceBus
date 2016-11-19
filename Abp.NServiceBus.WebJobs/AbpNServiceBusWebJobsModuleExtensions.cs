@@ -9,7 +9,7 @@ namespace Abp.NServiceBus.WebJobs
 {
     public static class AbpNServiceBusWebJobsModuleExtensions
     {
-        public static AbpNServiceBusWebJobsModuleConfig NServiceBus(this IModuleConfigurations moduleConfigurations)
+        public static AbpNServiceBusWebJobsModuleConfig NServiceBusWebJob(this IModuleConfigurations moduleConfigurations)
         {
             return moduleConfigurations.AbpConfiguration.Get<AbpNServiceBusWebJobsModuleConfig>();
         }

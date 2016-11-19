@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Abp.Dependency;
+using Castle.Core.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,15 +11,24 @@ using System.Threading.Tasks;
 
 namespace Abp.NServiceBus.WebJobs
 {
-    public static class WebJobUtils
+    public class WebJobUtils : ISingletonDependency
     {
         private static bool _running = true;
         private static string _shutdownFile;
 
-        public static void RunAndWait(TextWriter log)
+        public ILogger Logger { get; set; }
+
+        public WebJobUtils()
+        {
+            Logger = NullLogger.Instance;
+        }
+
+        public void RunAndWait()
         {
             if (!Debugger.IsAttached)
             {
+                Logger.Info("WebJobUtils: Running int production environment");
+
                 // Get the shutdown file path from the environment
                 _shutdownFile = Environment.GetEnvironmentVariable("WEBJOBS_SHUTDOWN_FILE");
 
@@ -34,20 +45,25 @@ namespace Abp.NServiceBus.WebJobs
             while (_running)
             {
                 // Here is my actual work
-                log.WriteLine("WebJobUtils: Running and waiting " + DateTime.UtcNow);
+                Logger.InfoFormat("WebJobUtils: Running and waiting {0}", DateTime.UtcNow);
                 Thread.Sleep(3000);
             }
 
-            log.WriteLine("WebJobUtils: Stopped " + DateTime.UtcNow);
+            Logger.InfoFormat("WebJobUtils: Stopped {0}", DateTime.UtcNow);
         }
 
-        private static void OnChanged(object sender, FileSystemEventArgs e)
+        private void OnChanged(object sender, FileSystemEventArgs e)
         {
+            Logger.InfoFormat("WebJob Directory changed detected, looking for shutdown file...");
+
             if (e.FullPath.IndexOf(Path.GetFileName(_shutdownFile), StringComparison.OrdinalIgnoreCase) >= 0)
             {
+                Logger.InfoFormat("Shutdown file detected, stopping...");
                 // Found the file mark this WebJob as finished
                 _running = false;
             }
+
+            Logger.InfoFormat("Shutdown file not detected, WebJob still running");
         }
     }
 }

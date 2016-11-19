@@ -21,5 +21,11 @@ namespace Abp.NServiceBus.WebJobs
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
+
+        public override void PostInitialize()
+        {
+            // Start WebJob
+
+        }
     }
 }
