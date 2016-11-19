@@ -46,6 +46,10 @@ namespace Abp.NServiceBus.WebJobs
                 host.Call<TStartupModule>();
                 host.RunAndBlock();
             }
+            catch (TaskCanceledException)
+            {
+                Console.WriteLine("WebJob TaskCancelled");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("Fatal Exception");
