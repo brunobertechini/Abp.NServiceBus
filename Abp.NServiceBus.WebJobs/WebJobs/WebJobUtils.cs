@@ -27,7 +27,7 @@ namespace Abp.NServiceBus.WebJobs
         {
             if (!Debugger.IsAttached)
             {
-                Logger.Info("WebJobUtils: Running int production environment");
+                Logger.Debug("WebJobUtils: Running in production environment");
 
                 // Get the shutdown file path from the environment
                 _shutdownFile = Environment.GetEnvironmentVariable("WEBJOBS_SHUTDOWN_FILE");
@@ -45,7 +45,7 @@ namespace Abp.NServiceBus.WebJobs
             while (_running)
             {
                 // Here is my actual work
-                Logger.InfoFormat("WebJobUtils: Running and waiting {0}", DateTime.UtcNow);
+                Logger.DebugFormat("WebJobUtils: Running and waiting {0}", DateTime.UtcNow);
                 Thread.Sleep(3000);
             }
 
