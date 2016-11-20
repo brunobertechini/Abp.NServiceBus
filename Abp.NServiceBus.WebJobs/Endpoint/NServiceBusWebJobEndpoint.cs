@@ -28,7 +28,7 @@ namespace Abp.NServiceBus.WebJobs
 
             // Lock until cancelled
             Console.WriteLine("Lock Thread using WebJobUtils...");
-            IocManager.Instance.Resolve<WebJobUtils>().RunAndWait();
+            IocManager.Instance.Resolve<WebJobUtils>().RunAndWait(log);
 
             // Dispose Abp
             Console.WriteLine("Thread released, disposing Abp...");
