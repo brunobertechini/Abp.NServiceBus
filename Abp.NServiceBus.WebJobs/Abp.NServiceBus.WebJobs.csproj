@@ -127,8 +127,8 @@
     <Compile Include="AbpNServiceBusWebJobsModule.cs" />
     <Compile Include="AbpNServiceBusWebJobsModuleConfig.cs" />
     <Compile Include="AbpNServiceBusWebJobsModuleExtensions.cs" />
-    <Compile Include="Endpoint\NServiceBusWebJobEndpoint.cs" />
-    <Compile Include="Endpoint\NServiceBusWebJobEndpointRunner.cs" />
+    <Compile Include="Endpoint\WebJobEndpoint.cs" />
+    <Compile Include="Endpoint\WebJobEndpointRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,9 +141,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebJobs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
