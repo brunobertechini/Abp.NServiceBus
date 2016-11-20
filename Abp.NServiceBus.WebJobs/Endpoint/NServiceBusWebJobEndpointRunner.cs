@@ -1,4 +1,5 @@
 ﻿using Abp;
+using Abp.Dependency;
 using Abp.Modules;
 using Castle.Facilities.Logging;
 using Microsoft.Azure.WebJobs;
@@ -43,12 +44,25 @@ namespace Abp.NServiceBus.WebJobs
 
             try
             {
-                host.Call<TStartupModule>();
+                var bootstrapper = AbpBootstrapper.Create<TStartupModule>();
+                bootstrapper.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("log4net.config"));
+
+                host.Call(typeof(NServiceBusWebJobEndpoint).GetMethod("Start"), new { bootstrapper = bootstrapper });
+
                 host.RunAndBlock();
+
+                Console.WriteLine("Disposing Abp/NServiceBus...");
+                bootstrapper.Dispose();
+                Console.WriteLine("Abp disposed successfully.");
+
+                if (Debugger.IsAttached)
+                    Console.Read();
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException ex)
             {
-                Console.WriteLine("WebJob TaskCancelled");
+                Console.WriteLine("TaskCancelled Exception");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
             catch (Exception ex)
             {
