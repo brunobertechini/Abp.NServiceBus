@@ -82,6 +82,9 @@ namespace Abp.NServiceBus
             // Persistence
             endpointConfiguration.ConfigureAbpNServiceBusDefaultPersistence();
 
+            // Outbox
+            endpointConfiguration.EnableOutbox();
+
             // Unobtrusive Message Mode
             endpointConfiguration.UseAbpNServiceBusMessageConventions();
 

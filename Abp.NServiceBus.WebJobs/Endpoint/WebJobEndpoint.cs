@@ -19,6 +19,8 @@ namespace Abp.NServiceBus.WebJobs
 {
     public class WebJobEndpoint
     {
+        private bool _isRunning = false;
+
         [NoAutomaticTrigger]
         public void Start(TextWriter log, CancellationToken cancellationToken, AbpBootstrapper bootstrapper)
         {
@@ -29,6 +31,17 @@ namespace Abp.NServiceBus.WebJobs
 
             Console.WriteLine("Initializing Abp");
             bootstrapper.Initialize();
+
+            _isRunning = true;
+            new WebJobsShutdownWatcher().Token.Register(() =>
+            {
+                _isRunning = false;
+            });
+
+            while(_isRunning)
+            {
+                Thread.Sleep(3000);
+            }
         }
     }
 }

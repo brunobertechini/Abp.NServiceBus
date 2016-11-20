@@ -42,14 +42,13 @@ namespace Abp.NServiceBus.WebJobs
                 host = new JobHost();
             }
 
+            var bootstrapper = AbpBootstrapper.Create<TStartupModule>();
+            bootstrapper.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("log4net.config"));
+
+
             try
             {
-                var bootstrapper = AbpBootstrapper.Create<TStartupModule>();
-                bootstrapper.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("log4net.config"));
-
                 host.Call(typeof(WebJobEndpoint).GetMethod("Start"), new { bootstrapper = bootstrapper });
-
-                host.RunAndBlock();
 
                 Console.WriteLine("Disposing Abp/NServiceBus...");
                 bootstrapper.Dispose();
@@ -58,11 +57,14 @@ namespace Abp.NServiceBus.WebJobs
                 if (Debugger.IsAttached)
                     Console.Read();
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {
-                Console.WriteLine("TaskCancelled Exception");
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Disposing Abp/NServiceBus...");
+                bootstrapper.Dispose();
+                Console.WriteLine("Abp disposed successfully.");
+
+                if (Debugger.IsAttached)
+                    Console.Read();
             }
             catch (Exception ex)
             {
