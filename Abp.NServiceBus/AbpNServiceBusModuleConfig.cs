@@ -24,6 +24,7 @@ namespace Abp.NServiceBus
             LogLevel = null;
             AuditQueue = "audit";
             ErrorQueue = "error";
+            UseOutbox = true;
         }
 
         /// <summary>
@@ -90,5 +91,10 @@ namespace Abp.NServiceBus
         /// Error Queue Name. Default: 'error'.
         /// </summary>
         public string ErrorQueue { get; set; }
+
+        /// <summary>
+        /// Enable NServiceBus Outbox Feature. Default: true.
+        /// </summary>
+        public bool UseOutbox { get; set; }
     }
 }
