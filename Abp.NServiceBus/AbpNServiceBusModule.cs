@@ -79,6 +79,10 @@ namespace Abp.NServiceBus
             // Transport
             endpointConfiguration.ConfigureAbpNServiceBusDefaultTransport();
 
+            // MaxConcurrencyLevel
+            if (config.MaximumConcurrencyLevel.HasValue)
+                endpointConfiguration.LimitMessageProcessingConcurrencyTo(config.MaximumConcurrencyLevel.Value);
+
             // Persistence
             endpointConfiguration.ConfigureAbpNServiceBusDefaultPersistence();
 

@@ -25,6 +25,7 @@ namespace Abp.NServiceBus
             AuditQueue = "audit";
             ErrorQueue = "error";
             UseOutbox = true;
+            MaximumConcurrencyLevel = null;
         }
 
         /// <summary>
@@ -96,5 +97,12 @@ namespace Abp.NServiceBus
         /// Enable NServiceBus Outbox Feature. Default: true.
         /// </summary>
         public bool UseOutbox { get; set; }
+
+        /// <summary>
+        /// Maximum Concurrency Level. Default: null (NServiceBus Transport will choose best value)
+        /// @see https://docs.particular.net/nservicebus/operations/tuning
+        /// </summary>
+        public int? MaximumConcurrencyLevel { get; set; }
+    
     }
 }
