@@ -11,20 +11,16 @@ using System.Threading.Tasks;
 
 namespace Abp.NServiceBus
 {
-    public class AbpNServiceBusUnitOfWork : Behavior<IIncomingPhysicalMessageContext>
+    public class AbpNServiceBusUnitOfWork : Behavior<IInvokeHandlerContext>
     {
         private ILog Logger = LogManager.GetLogger<AbpNServiceBusUnitOfWork>();
 
-        public override async Task Invoke(IIncomingPhysicalMessageContext context, Func<Task> next)
+        public override async Task Invoke(IInvokeHandlerContext context, Func<Task> next)
         {
             Logger.DebugFormat("Message: {0}", context.MessageId);
 
             // Get AbpSession
             IAbpSession session = IocManager.Instance.Resolve<IAbpSession>();
-            Logger.DebugFormat("Message/AbpSession: {0}/{1}", context.MessageId, session.GetHashCode());
-
-            AbpNServiceBusSession nsbSession = session as AbpNServiceBusSession;
-            nsbSession.SetHeaders(context.MessageHeaders);
 
             // Get instance of UnitOfWorkManager
             IUnitOfWorkManager uowManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();

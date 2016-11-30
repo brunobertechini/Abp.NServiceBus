@@ -119,6 +119,7 @@
     <Compile Include="Handlers\HandlerBase.cs" />
     <Compile Include="Persistence\AbpNServiceBusPersistenceExtensions.cs" />
     <Compile Include="Runtime\AbpNServiceBusSession.cs" />
+    <Compile Include="Runtime\AbpNServiceBusSessionBehavior.cs" />
     <Compile Include="Transport\AbpNServiceBusTransportExtensions.cs" />
     <Compile Include="UnitOfWork\AbpNServiceBusUnitOfWork.cs" />
     <Compile Include="Runtime\AbpNServiceBusSessionHeaderAppender.cs" />

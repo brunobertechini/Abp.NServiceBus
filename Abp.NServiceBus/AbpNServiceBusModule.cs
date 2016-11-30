@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Modules;
+using Abp.NServiceBus.Runtime;
 using Abp.Runtime.Session;
 using Castle.MicroKernel.Registration;
 using NServiceBus;
@@ -47,7 +48,7 @@ namespace Abp.NServiceBus
                 });
 
                 // Default IsolationLevel
-                Configuration.UnitOfWork.IsTransactional = false;
+                //Configuration.UnitOfWork.IsTransactional = false;
                 Configuration.UnitOfWork.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
             }
         }
@@ -120,7 +121,7 @@ namespace Abp.NServiceBus
                 });
 
             // UnitOfWork
-            endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusUnitOfWork), typeof(AbpNServiceBusUnitOfWork).Name);
+            endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusSessionBehavior), typeof(AbpNServiceBusSessionBehavior).Name);
         }
 
         public override void PostInitialize()

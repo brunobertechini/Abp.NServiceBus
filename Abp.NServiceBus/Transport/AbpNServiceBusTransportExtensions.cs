@@ -17,6 +17,7 @@ namespace Abp.NServiceBus
             var config = IocManager.Instance.Resolve<AbpNServiceBusModuleConfig>();
 
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
+            transport.WithPeekDelay(TimeSpan.FromSeconds(5));
 
             if (!string.IsNullOrEmpty(config.TransportConnectionString))
                 transport.ConnectionString(config.TransportConnectionString);
