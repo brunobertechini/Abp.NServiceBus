@@ -17,13 +17,13 @@ namespace Abp.NServiceBus
             EndpointName = null;
             EndpointConfiguration = null;
             LogDirectory = null;
-            DatabaseSchemaName = "nsb";
+            EndpointDatabaseSchema = "dbo";
             ImmediateRetries = 0;
             DelayedRetries = 0;
             DelayedRetriesTimeIncreaseInSeconds = 30;
             LogLevel = null;
-            AuditQueue = "audit";
-            ErrorQueue = "error";
+            AuditQueue = "Endpoint.Audit";
+            ErrorQueue = "Endpoint.Error";
             UseOutbox = true;
             MaximumConcurrencyLevel = null;
         }
@@ -54,9 +54,9 @@ namespace Abp.NServiceBus
         public LogLevel? LogLevel { get; set; }
 
         /// <summary>
-        /// Custom Database Schema Name. Default: "nsb".
+        /// Custom Database Schema Name. Default: "dbo".
         /// </summary>
-        public string DatabaseSchemaName { get; set; }
+        public string EndpointDatabaseSchema { get; set; }
 
         /// <summary>
         /// Number of ImmediateRetries to perform. Default: 0.
@@ -84,12 +84,12 @@ namespace Abp.NServiceBus
         public string PersistenceConnectionString { get; set; }
 
         /// <summary>
-        /// Audit Queue Name. Default: 'audit'.
+        /// Audit Queue Name. Default: 'Endpoint.Audit'.
         /// </summary>
         public string AuditQueue { get; set; }
 
         /// <summary>
-        /// Error Queue Name. Default: 'error'.
+        /// Error Queue Name. Default: 'Endpoint.Error'.
         /// </summary>
         public string ErrorQueue { get; set; }
 

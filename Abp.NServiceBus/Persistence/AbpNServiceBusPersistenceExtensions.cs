@@ -24,13 +24,12 @@ namespace Abp.NServiceBus
                     ["dialect"] = "NHibernate.Dialect.MsSql2012Dialect",
                     ["connection.provider"] = "NHibernate.Connection.DriverConnectionProvider",
                     ["connection.driver_class"] = "NHibernate.SqlAzure.SqlAzureClientDriver, NHibernate.SqlAzure",
-                    ["default_schema"] = config.DatabaseSchemaName,
+                    ["default_schema"] = config.EndpointDatabaseSchema,
                     ["connection.connection_string"] = config.PersistenceConnectionString
                }
             };
 
             var persistence = endpointConfiguration.UsePersistence<NHibernatePersistence>();
-
             persistence.UseConfiguration(nhConfiguration);
         }
 
