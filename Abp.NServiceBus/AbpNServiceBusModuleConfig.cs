@@ -103,6 +103,11 @@ namespace Abp.NServiceBus
         /// @see https://docs.particular.net/nservicebus/operations/tuning
         /// </summary>
         public int? MaximumConcurrencyLevel { get; set; }
-    
+
+        /// <summary>
+        /// Use a EF UoW from Abp (Default: false)
+        /// Must set UnitOfWork.IsTransactionalFalse before
+        /// </summary>
+        public bool UseEntityFrameworkUnitOfWork  { get; set; }
     }
 }

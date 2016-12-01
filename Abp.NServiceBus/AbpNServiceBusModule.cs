@@ -120,8 +120,11 @@ namespace Abp.NServiceBus
                     components.ConfigureComponent<AbpNServiceBusSessionHeaderAppender>(DependencyLifecycle.InstancePerCall);
                 });
 
-            // UnitOfWork
+            // Abp Session
             endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusSessionBehavior), typeof(AbpNServiceBusSessionBehavior).Name);
+
+            if(config.UseEntityFrameworkUnitOfWork)
+                endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusUnitOfWork), typeof(AbpNServiceBusUnitOfWork).Name);
         }
 
         public override void PostInitialize()
