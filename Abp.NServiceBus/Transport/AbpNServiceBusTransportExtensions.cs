@@ -11,8 +11,7 @@ namespace Abp.NServiceBus
 {
     public static class AbpNServiceBusTransportExtensions
     {
-
-        public static void ConfigureAbpNServiceBusDefaultTransport(this EndpointConfiguration endpointConfiguration)
+        public static TransportExtensions<SqlServerTransport> ConfigureAbpNServiceBusDefaultTransport(this EndpointConfiguration endpointConfiguration)
         {
             var config = IocManager.Instance.Resolve<AbpNServiceBusModuleConfig>();
 
@@ -31,7 +30,8 @@ namespace Abp.NServiceBus
 
             //if (!string.IsNullOrEmpty(config.EndpointDatabaseSchema))
             //    transport.DefaultSchema(config.EndpointDatabaseSchema);
-        }
 
+            return transport;
+        }
     }
 }

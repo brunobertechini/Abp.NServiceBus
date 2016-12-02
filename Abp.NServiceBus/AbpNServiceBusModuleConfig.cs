@@ -1,5 +1,6 @@
 ﻿using NServiceBus;
 using NServiceBus.Logging;
+using NServiceBus.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Abp.NServiceBus
             ErrorQueue = "Endpoint.Error";
             UseOutbox = true;
             MaximumConcurrencyLevel = null;
+            UseEntityFrameworkUnitOfWork = true;
         }
 
         /// <summary>
@@ -105,9 +107,15 @@ namespace Abp.NServiceBus
         public int? MaximumConcurrencyLevel { get; set; }
 
         /// <summary>
-        /// Use a EF UoW from Abp (Default: false)
+        /// Use a EF UoW from Abp (Default: true)
         /// Must set UnitOfWork.IsTransactionalFalse before
         /// </summary>
         public bool UseEntityFrameworkUnitOfWork  { get; set; }
+
+        public bool DoNotUseDefaultTransport { get; set; }
+
+        public bool DoNotUseDefaultPersistence { get; set; }
+
     }
+
 }

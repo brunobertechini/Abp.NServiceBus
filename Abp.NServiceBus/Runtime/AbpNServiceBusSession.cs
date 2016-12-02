@@ -29,7 +29,7 @@ namespace Abp.NServiceBus
             _config = config;
 
             if(_config.Debug)
-                Logger.InfoFormat("Creating New Instance: {0}.", GetHashCode());
+                Logger.DebugFormat("Creating New Instance: {0}.", GetHashCode());
         }
 
         /// <summary>
@@ -120,11 +120,11 @@ namespace Abp.NServiceBus
         {
             if(_config.Debug && headers.Any(x => x.Key.StartsWith(MessageHeaders.Prefix)))
             {
-                Logger.InfoFormat("Setting Headers");
+                Logger.DebugFormat("Setting Headers");
                 foreach (var header in headers)
                 {
                     if(header.Key.StartsWith(MessageHeaders.Prefix))
-                        Logger.InfoFormat("{0}: {1}", header.Key, header.Value);
+                        Logger.DebugFormat("{0}: {1}", header.Key, header.Value);
                 }
             }
            

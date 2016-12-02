@@ -27,23 +27,16 @@ namespace Abp.NServiceBus
             Logger.DebugFormat("Message/UowManager: {0}/{1}", context.MessageId, uowManager.GetHashCode());
 
             IUnitOfWorkCompleteHandle unitOfWork;
-            try
-            {
-                // Start UnitOfWork
-                unitOfWork = uowManager.Begin();
-                Logger.DebugFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, uowManager.Current.GetHashCode());
 
-                // Call next step in pipeline
-                await next();
+            // Start UnitOfWork
+            unitOfWork = uowManager.Begin();
+            Logger.DebugFormat("Message/UnitOfWork: {0}/{1}", context.MessageId, uowManager.Current.GetHashCode());
 
-                // Complete UnitOfWork if no exception is raised
-                await unitOfWork.CompleteAsync();
-            }
-            catch (Exception)
-            {
-                // Does not Complete UnitOfWork
-                throw;
-            }
+            // Call next step in pipeline
+            await next();
+
+            // Complete UnitOfWork if no exception is raised
+            await unitOfWork.CompleteAsync();
         }
     }
 }

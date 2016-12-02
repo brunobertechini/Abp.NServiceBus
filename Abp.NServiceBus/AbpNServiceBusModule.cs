@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Modules;
+using Abp.NServiceBus;
 using Abp.NServiceBus.Runtime;
 using Abp.Runtime.Session;
 using Castle.MicroKernel.Registration;
@@ -48,7 +49,7 @@ namespace Abp.NServiceBus
                 });
 
                 // Default IsolationLevel
-                //Configuration.UnitOfWork.IsTransactional = false;
+                Configuration.UnitOfWork.IsTransactional = false;
                 Configuration.UnitOfWork.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
             }
         }
@@ -77,15 +78,20 @@ namespace Abp.NServiceBus
             endpointConfiguration.SendFailedMessagesTo(config.ErrorQueue);
             endpointConfiguration.AuditProcessedMessagesTo(config.AuditQueue);
 
+            // Serialization
+            var serializer = endpointConfiguration.UseSerialization<JsonSerializer>();
+
             // Transport
-            endpointConfiguration.ConfigureAbpNServiceBusDefaultTransport();
+            if(!config.DoNotUseDefaultTransport)
+                endpointConfiguration.ConfigureAbpNServiceBusDefaultTransport();
 
             // MaxConcurrencyLevel
             if (config.MaximumConcurrencyLevel.HasValue)
                 endpointConfiguration.LimitMessageProcessingConcurrencyTo(config.MaximumConcurrencyLevel.Value);
 
             // Persistence
-            endpointConfiguration.ConfigureAbpNServiceBusDefaultPersistence();
+            if(!config.DoNotUseDefaultPersistence)
+                endpointConfiguration.ConfigureAbpNServiceBusDefaultPersistence();
 
             // Outbox
             if(config.UseOutbox)
@@ -123,8 +129,11 @@ namespace Abp.NServiceBus
             // Abp Session
             endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusSessionBehavior), typeof(AbpNServiceBusSessionBehavior).Name);
 
-            if(config.UseEntityFrameworkUnitOfWork)
+            if (config.UseEntityFrameworkUnitOfWork)
+            {
+                Configuration.UnitOfWork.IsTransactional = false;
                 endpointConfiguration.Pipeline.Register(typeof(AbpNServiceBusUnitOfWork), typeof(AbpNServiceBusUnitOfWork).Name);
+            }
         }
 
         public override void PostInitialize()
