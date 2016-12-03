@@ -49,7 +49,6 @@ namespace Abp.NServiceBus
                 });
 
                 // Default IsolationLevel
-                Configuration.UnitOfWork.IsTransactional = false;
                 Configuration.UnitOfWork.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
             }
         }
@@ -82,7 +81,7 @@ namespace Abp.NServiceBus
             var serializer = endpointConfiguration.UseSerialization<JsonSerializer>();
 
             // Transport
-            if(!config.DoNotUseDefaultTransport)
+            if (!config.DoNotUseDefaultTransport)
                 endpointConfiguration.ConfigureAbpNServiceBusDefaultTransport();
 
             // MaxConcurrencyLevel
@@ -96,6 +95,10 @@ namespace Abp.NServiceBus
             // Outbox
             if(config.UseOutbox)
                 endpointConfiguration.EnableOutbox();
+
+            // Abp UnitOfWork
+            if (config.UseEntityFrameworkUnitOfWork)
+                Configuration.UnitOfWork.IsTransactional = false;
 
             // Unobtrusive Message Mode
             endpointConfiguration.UseAbpNServiceBusMessageConventions();

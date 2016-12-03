@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using Abp.Configuration.Startup;
+using NServiceBus;
 using NServiceBus.Logging;
 using NServiceBus.Transport;
 using System;
@@ -25,13 +26,15 @@ namespace Abp.NServiceBus
             LogLevel = null;
             AuditQueue = "Endpoint.Audit";
             ErrorQueue = "Endpoint.Error";
-            UseOutbox = true;
+            UseOutbox = false;
             MaximumConcurrencyLevel = null;
             UseEntityFrameworkUnitOfWork = true;
+            TransportPeekDelay = TimeSpan.FromSeconds(1);
+            TransportTransactionMode = null;
         }
 
         /// <summary>
-        /// Enable Debug
+        /// Enable Debug (Default: false)
         /// </summary>
         public bool Debug { get; set; }
 
@@ -96,7 +99,7 @@ namespace Abp.NServiceBus
         public string ErrorQueue { get; set; }
 
         /// <summary>
-        /// Enable NServiceBus Outbox Feature. Default: true.
+        /// Enable NServiceBus Outbox Feature. Default: false.
         /// </summary>
         public bool UseOutbox { get; set; }
 
@@ -115,6 +118,13 @@ namespace Abp.NServiceBus
         public bool DoNotUseDefaultTransport { get; set; }
 
         public bool DoNotUseDefaultPersistence { get; set; }
+
+        public TimeSpan TransportPeekDelay { get; set; }
+
+        /// <summary>
+        /// NServiceBus Transport Transaction Mode. (Default null: use Transport's default)
+        /// </summary>
+        public TransportTransactionMode? TransportTransactionMode { get; set; }
 
     }
 

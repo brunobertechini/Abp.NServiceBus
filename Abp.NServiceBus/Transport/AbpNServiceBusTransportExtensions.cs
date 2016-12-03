@@ -18,7 +18,7 @@ namespace Abp.NServiceBus
             var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
 
             // Default Peek Delay
-            transport.WithPeekDelay(TimeSpan.FromSeconds(5));
+            transport.WithPeekDelay(config.TransportPeekDelay);
 
             // Schemas
             transport.UseSchemaForQueue(config.AuditQueue, "dbo");
@@ -28,8 +28,8 @@ namespace Abp.NServiceBus
             if (!string.IsNullOrEmpty(config.TransportConnectionString))
                 transport.ConnectionString(config.TransportConnectionString);
 
-            //if (!string.IsNullOrEmpty(config.EndpointDatabaseSchema))
-            //    transport.DefaultSchema(config.EndpointDatabaseSchema);
+            if(config.TransportTransactionMode.HasValue)
+                transport.Transactions(config.TransportTransactionMode.Value);
 
             return transport;
         }
